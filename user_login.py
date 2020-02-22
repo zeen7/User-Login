@@ -1,9 +1,11 @@
 import hashlib
-import json
+import os.path
 import sqlite3
 
 #database connection
-db_connection = sqlite3.connect('C:\\Users\\zeen-\\OneDrive\\桌面\\User Login\\database.db')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "account_database.db")
+db_connection = sqlite3.connect(db_path)
 c = db_connection.cursor()
 
 #SHA256 hashing
@@ -59,10 +61,9 @@ def create_account():
             c.execute('SELECT password_hash FROM users;')
             password_db = c.fetchall()
             password_db = [j[0] for j in password_db]
-
             #convert new password to hash
             new_password_hash=hash_target(new_password)
-                    
+        
             if new_username==username_db[x] or new_password_hash==password_db[x]:
                 print("Username or password already taken")
 
@@ -89,21 +90,24 @@ def hash_target(new_password):
     return hash1.hexdigest()
 
 #main method
-def main():
-    choice=main_menu()
-    if choice==1:
-        #Prompts user to enter username and password
-        username_attempt=input("Enter your username: ")
-        password_attempt=input("Enter your password: ")
-        is_valid_credentials(username_attempt, password_attempt)
-    elif choice==2:
-        create_account()
-        print("\n")
-        #Prompts user to enter username and password
-        username_attempt=input("Enter your username: ")
-        password_attempt=input("Enter your password: ")
-        is_valid_credentials(username_attempt, password_attempt)
-    elif choice==3:
-        print("Exited Account Login")
+def main(): 
+    user_quit=False
+    while(user_quit==False):
+        choice=main_menu()
+        #Login
+        if choice==1:
+            username_attempt=input("Enter your username: ")
+            password_attempt=input("Enter your password: ")
+            is_valid_credentials(username_attempt, password_attempt)
+        #Create account
+        elif choice==2:
+            create_account()
+        #Exit
+        elif choice==3:
+            print("Exited Account Login")
+            user_quit=True
+        else:
+            print("Invalid Command")
 
-main()
+if __name__ == '__main__':
+    main()
