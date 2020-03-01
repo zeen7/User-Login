@@ -19,8 +19,6 @@ def is_valid_credentials(username_try, password_try):
         c.execute("SELECT password_hash FROM users WHERE username='"+username_try+"';")
         pw_db = c.fetchall()
         pw_db=[i[0] for i in pw_db]
-        print(pw_db[0])
-        print(hash_target(password_try))
         if len(pw_db)>0:
             if pw_db[0]==hash_target(password_try):
                 print("Correct credentials")
