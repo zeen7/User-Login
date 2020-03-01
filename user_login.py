@@ -1,6 +1,7 @@
 import hashlib
 import os.path
 import sqlite3
+from getpass import getpass
 
 #database connection
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -49,8 +50,8 @@ def main_menu():
 #Creates a new account
 def create_account():
     new_username=input("Enter a new username: ")
-    unverified_password=input("Enter a new password: ")
-    new_password=input("Enter password again: ")
+    unverified_password=getpass("Enter a new password: ")
+    new_password=getpass("Enter password again: ")
 
     if (unverified_password==new_password):
         #check if username is taken
@@ -99,7 +100,7 @@ def main():
         #Login
         if choice==1:
             username_attempt=input("Enter your username: ")
-            password_attempt=input("Enter your password: ")
+            password_attempt=getpass("Enter your password: ")
             is_valid_credentials(username_attempt, password_attempt)
         #Create account
         elif choice==2:
