@@ -4,4 +4,9 @@ the database and SHA256 as the hash function.
 
 I did this project to help myself learn about hashing and working with databases in Python. 
 
-[![](https://imgur.com/FIt98Wm)]()
+## Create an account
+[![](https://i.imgur.com/PuD6alT.png)]()
+## Account information saved to database
+[![](https://i.imgur.com/pH1GKby.png)]()
+## Account login
+[![](https://i.imgur.com/jV8Ewel.png)]()
